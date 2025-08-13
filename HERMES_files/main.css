@@ -73,7 +73,7 @@ body, html {
 }
 
 .video_container:hover video {
-    filter: brightness(100%); /* Dim the video */
+    filter: brightness(1.0); /* 保持与默认状态一致的亮度 */
 }
 
 .video_container:hover .overlay {
@@ -1033,7 +1033,7 @@ html.w-mod-touch * {
 }
 
 .video_container video {
-    filter: brightness(1.1); /* 增加20%的亮度，可以根据需要调整数值 */
+    filter: brightness(1.0); /* 降低亮度，让文字更清晰 */
 }
 video {
     width: 100%;
