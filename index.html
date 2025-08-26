@@ -1060,19 +1060,19 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
 
     <h1 id="q&amp;a">Q &amp; A</h1>
     <p>
-        <b>Q:</b> What is the limitation of HERMES?
-        <br>
-        <b>A:</b> 1) The chassis has relatively low precision; 2) If there is a large discrepancy between the assembly of the physical robot and that of the simulated robot, hybrid control may fail; 3) The parameters for collision and physics simulation can be better tuned to reduce mesh penetration and object jitter.
-    </p>
-    <p>
         <b>Q:</b> Why does temporary pauses occur during the real-time PnP phase?
         <br>
         <b>A:</b> Due to the limited control precision of the mobile base, we reduced the integral gain \( K_i \) in PID control to minimize localization error. During the final refinement stage, the pose deviation becomes minimal, causing the integral term to accumulate slowly. As a result, the control signal may fall below the minimum actuation threshold for base movement, leading to temporary pauses in the base's motion.
     </p>
     <p>
+        <b>Q:</b> Why does the robot sway left and right during navigation?
+        <br>
+        <b>A:</b> The actions output by ViNT tend to fluctuate laterally. We directly used the outputs from ViNT without applying any smoothing. We found that using the raw action outputs yields better performance when handling sharp turns, intersections, or obstacle avoidance. Therefore, we did not apply additional processing.
+    </p>
+    <p>
         <b>Q:</b> How does HERMES determine the final target position?
         <br>
-        <b>A:</b> We first use a camera to capture the target position. Then, adopting the same navigation settings as ViNT, we infer actions from the RGB images in the recorded trajectory.
+        <b>A:</b> We first employ the depth camera to capture the target pose. Subsequently, following the same navigation settings as ViNT, we infer actions from the RGB images in the recorded trajectory. Once navigation completes, the robot's pose is refined to the recorded target pose via closed-loop PnP.
     </p>
     <p>
         <b>Q:</b> Does HERMES require camera calibration?
